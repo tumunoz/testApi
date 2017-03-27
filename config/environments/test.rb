@@ -37,6 +37,18 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # don't generate RSpec tests for views and helpers
+  config.generators do |g|
+    g.test_framework :rspec, fixture: true
+    g.fixture_replacement :factory_girl, dir: 'spec/factories'
+    g.view_specs false
+    g.helper_specs false
+    g.stylesheets = false
+    g.javascripts = false
+    g.helper = false
+  end
+
+  config.autoload_paths += %W(\#{config.root}/lib)
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
